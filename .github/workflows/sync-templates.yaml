@@ -1,0 +1,9 @@
+name: Sync Templates
+on:
+  workflow_dispatch:
+jobs:
+  sync-templates:
+    uses: finnplay/helm-reusables/.github/workflows/sync-templates.yaml@master
+    secrets: inherit # pragma: allowlist secret
+    with:
+      dry_run: false

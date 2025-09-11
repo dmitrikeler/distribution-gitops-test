@@ -1,0 +1,22 @@
+name: stage
+description: Stage Environment
+config:
+  helmRepoUrl: oci://ghcr.io/finnplay
+  distributionRepoUrl: git@github.com:ddobrodeev/gitops-test.git
+  argocdNamespace: argocd
+  argocdProject: finnplay-stage
+applications:
+  - name: titan-platform
+    version: 2.71.0-rc.4
+    enabled: true
+    valueFiles:
+      - game-provider-api-values.yaml
+      - platform-rest-api-values.yaml
+      - titan-platform-values.yaml
+  - name: titan-support-services
+    version: 2.63.0+build.1
+    enabled: true
+    valueFiles:
+      - activemq-values.yaml
+      - consul-values.yaml
+      - titan-support-services-values.yaml

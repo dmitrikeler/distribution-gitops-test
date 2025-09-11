@@ -1,0 +1,79 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-apps
+  namespace: argocd
+  labels:
+    environment: dev
+    type: application-set
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - name: titan-platform
+        version: 2.71.0-rc.4
+        enabled: "true"
+        valueFiles: ["game-provider-api-values.yaml","platform-rest-api-values.yaml","titan-platform-values.yaml"]
+      - name: titan-support-services
+        version: 2.63.0+build.1
+        enabled: "true"
+        valueFiles: ["activemq-values.yaml","consul-values.yaml","titan-support-services-values.yaml"]
+  template:
+    metadata:
+      name: '{{.name}}-dev'
+      namespace: argocd
+      labels:
+        environment: dev
+        application: '{{.name}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "1"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: finnplay-dev
+      source:
+        repoURL: oci://ghcr.io/finnplay
+        chart: '{{.name}}'
+        targetRevision: '{{.version}}'
+        helm:
+          parameters: []
+{{- if .valueFiles }}
+          valueFiles:
+{{- range .valueFiles }}
+            - 'git@github.com:ddobrodeev/gitops-test.git/dev/{{.name}}/values/{{.}}'
+{{- end }}
+{{- end }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: dev
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 5m
+      revisionHistoryLimit: 10
+---
+# Namespace for the environment
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: dev
+    managed-by: finnit

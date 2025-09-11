@@ -1,0 +1,15 @@
+version: "1.0"
+customer: finnplay
+argocd:
+  server: argocd.tooling.test.finnplay.k8s.shockmedia.nl
+jenkins:
+  server: http://localhost:8080
+  seedJob:
+    name: gitops-seed-job
+    folder: ""
+repositories:
+  helm: oci://ghcr.io/finnplay
+  distribution: git@github.com:ddobrodeev/gitops-test.git
+reusables:
+  lastSyncSha: 1a325cd8529b55a3f454a84b9dfe9169ac3566d0
+  lastSyncDate: 2025-09-10T10:40:48.978Z
