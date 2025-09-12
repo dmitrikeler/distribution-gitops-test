@@ -1,13 +1,14 @@
 cron-task-report:
-  enabled: true
+  enabled: false
   nameOverride: cron-task-report
   app:
     localConfigMaps:
       application-vars:
-        cronStrings: "0 3 * * * echo 'script to execute goes here'"
+        cronStrings: 0 3 * * * echo 'script to execute goes here'
     volumes:
-      - name: log-volume
-        emptyDir: {}
+    - name: log-volume
+      emptyDir: {
+        }
     volumeMounts:
-      - name: log-volume
-        mountPath: /logs
+    - name: log-volume
+      mountPath: /logs

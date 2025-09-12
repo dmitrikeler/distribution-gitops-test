@@ -1,2 +1,2 @@
 platform-webhook:
-  enabled: false
+  enabled: true

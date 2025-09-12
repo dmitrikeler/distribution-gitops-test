@@ -1,6 +1,6 @@
 platform-language-consumer:
-  enabled: true
+  enabled: false
   app:
     image:
-      tag: "CHANGE_ME_PLATFORM_LANG_CONSUMER_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      tag: CHANGE_ME_PLATFORM_LANG_CONSUMER_TAG
       pullPolicy: Always

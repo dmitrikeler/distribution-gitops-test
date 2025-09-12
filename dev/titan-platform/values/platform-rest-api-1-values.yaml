@@ -1,19 +1,19 @@
 platform-rest-api-1:
-  enabled: true
-  nameOverride: "platform-rest-api-CHANGE_ME_CUSTOMER_ID"  # Example: platform-rest-api-prod1ks
+  enabled: false
+  nameOverride: platform-rest-api-CHANGE_ME_CUSTOMER_ID
   app:
     image:
-      tag: "CHANGE_ME_PLATFORM_REST_API_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      tag: CHANGE_ME_PLATFORM_REST_API_TAG
       pullPolicy: Always
     resources:
       requests:
-        cpu: "100m"
-        memory: "2Gi"
+        cpu: 100m
+        memory: 2Gi
       limits:
-        cpu: "4000m"
-        memory: "8Gi"
+        cpu: 4000m
+        memory: 8Gi
     localConfigMaps:
       application-vars:
-        springCloudConsulDiscoveryServiceName: "platform-rest-api-CHANGE_ME_CUSTOMER_ID"  # Should match nameOverride
-        siteId: "CHANGE_ME_REST_API_SITE_ID"  # Example: 95
-        xBillfoldSiteId: "CHANGE_ME_BILLFOLD_SITE_ID"  # Example: 95
+        springCloudConsulDiscoveryServiceName: platform-rest-api-CHANGE_ME_CUSTOMER_ID
+        siteId: CHANGE_ME_REST_API_SITE_ID
+        xBillfoldSiteId: CHANGE_ME_BILLFOLD_SITE_ID
