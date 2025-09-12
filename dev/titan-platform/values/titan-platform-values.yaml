@@ -1,0 +1,43 @@
+---
+# =============================================================================
+# TITAN Platform - Global Configuration Template
+# =============================================================================
+# This file contains global values for the TITAN Platform deployment.
+# Subchart-specific configurations are in separate files.
+#
+# ⚠️  IMPORTANT: You MUST customize the values marked with CHANGE_ME before deployment!
+#
+# Common customizations needed:
+# 1. Update secret store name for your environment
+# 2. Configure database connection details with correct hosts and database names
+# 3. Update site IDs and customer-specific configurations
+# =============================================================================
+
+global:
+  dockerDefaults:
+    dockerRegistryUrlTitan: docker-new.finnplay.net
+
+  secretDefaults:
+    secretStoreName: "CHANGE_ME_SECRET_STORE_NAME"  # Example: finnplay-prod-secretstore
+    secretStoreKind: SecretStore # pragma: allowlist secret
+
+globalConfigMaps:
+  global-db-vars:
+    dbHost: "CHANGE_ME_DB_HOST"  # Example: 10.0.3.74
+    dbName: "CHANGE_ME_DB_NAME"  # Example: titan_prod_k8s
+
+  global-db-read-vars:
+    readDbHost: "CHANGE_ME_READ_DB_HOST"  # Example: 10.0.3.74
+    readDbName: "CHANGE_ME_READ_DB_NAME"  # Example: titan_prod_k8s
+    storageDbHost: "CHANGE_ME_STORAGE_DB_HOST"  # Example: 10.0.3.74
+    storageDbName: "CHANGE_ME_STORAGE_DB_NAME"  # Example: titan_prod_k8s
+
+  global-site-id-vars:
+    siteId: "CHANGE_ME_SITE_ID"  # Example: 95
+    siteIdsAndNames: "CHANGE_ME_SITE_ID:CHANGE_ME_SITE_NAME"  # Example: 120:titan_prod_k8s
+
+customConfigMaps:
+  platform-limit-spring-datasource-url:
+    dbName: "CHANGE_ME_LIMIT_DB_NAME"  # Example: titan_limit_prod_k8s
+  platform-player-spring-datasource-url:
+    dbName: "CHANGE_ME_PLAYER_DB_NAME"  # Example: titan_player_prod_k8s

@@ -1,0 +1,8 @@
+platform-limit:
+  app:
+    image:
+      tag: "CHANGE_ME_PLATFORM_LIMIT_TAG"  # Example: 2.41.0 (change from 2.41-SNAPSHOT for prod)
+      pullPolicy: Always
+    localConfigMaps:
+      application-vars:
+        javaOpts: "-Xmx1G -Xms1G -XX:+UseG1GC"

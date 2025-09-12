@@ -1,0 +1,5 @@
+platform-transaction-proxy:
+  app:
+    image:
+      tag: "CHANGE_ME_PLATFORM_TX_PROXY_TAG"  # Example: 2.20.0 (change from 2.20-SNAPSHOT for prod)
+      pullPolicy: Always

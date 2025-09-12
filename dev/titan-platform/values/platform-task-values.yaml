@@ -1,0 +1,8 @@
+platform-task:
+  app:
+    image:
+      tag: "CHANGE_ME_PLATFORM_TASK_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      pullPolicy: Always
+  localConfigMaps:
+    application-vars:
+      siteId: "CHANGE_ME_TASK_SITE_ID"  # Example: 101

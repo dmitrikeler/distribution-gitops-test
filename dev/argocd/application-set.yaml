@@ -1,0 +1,79 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-apps
+  namespace: argocd
+  labels:
+    environment: dev
+    type: application-set
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - name: titan-platform
+        version: 2.71.0-rc.4
+        enabled: "true"
+        valueFiles: ["backoffice-values.yaml","fe-1-values.yaml","fe-2-values.yaml","fe-3-values.yaml","fe-4-values.yaml","fe-5-values.yaml","game-provider-api-values.yaml","game-provider-consumer-values.yaml","payment-provider-api-values.yaml","platform-bo-api-values.yaml","platform-consumer-1-values.yaml","platform-language-1-values.yaml","platform-language-2-values.yaml","platform-language-3-values.yaml","platform-language-4-values.yaml","platform-language-5-values.yaml","platform-language-consumer-values.yaml","platform-limit-values.yaml","platform-player-values.yaml","platform-rest-api-1-values.yaml","platform-rest-api-2-values.yaml","platform-rest-api-3-values.yaml","platform-rest-api-4-values.yaml","platform-rest-api-5-values.yaml","platform-storage-values.yaml","platform-task-values.yaml","platform-tool-values.yaml","platform-transaction-proxy-values.yaml","platform-webhook-values.yaml","titan-platform-values.yaml"]
+      - name: titan-support-services
+        version: 2.63.0+build.1
+        enabled: "true"
+        valueFiles: ["activemq-values.yaml","apache-values.yaml","consul-values.yaml","cron-task-report-values.yaml","cron-task-values.yaml","gateway-values.yaml","nginx-values.yaml","redis-values.yaml","titan-support-services-values.yaml"]
+  template:
+    metadata:
+      name: '{{.name}}-dev'
+      namespace: argocd
+      labels:
+        environment: dev
+        application: '{{.name}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "1"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: finnplay-dev
+      source:
+        repoURL: oci://ghcr.io/finnplay
+        chart: '{{.name}}'
+        targetRevision: '{{.version}}'
+        helm:
+          parameters: []
+{{- if .valueFiles }}
+          valueFiles:
+{{- range .valueFiles }}
+            - 'https://github.com/dmitrikeler/distribution-gitops-test.git/dev/{{.name}}/values/{{.}}'
+{{- end }}
+{{- end }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: dev
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 5m
+      revisionHistoryLimit: 10
+---
+# Namespace for the environment
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: dev
+    managed-by: finnit
