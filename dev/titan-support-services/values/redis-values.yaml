@@ -1,7 +1,0 @@
-redis:
-  master:
-    persistence:
-      storageClass: "lvm-thin"
-  replica:
-    persistence:
-      storageClass: "lvm-thin"
