@@ -1,2 +1,9 @@
 game-provider-api:
+<<<<<<< HEAD
   enabled: true
+=======
+  app:
+    image:
+      tag: "CHANGE_ME_GAME_PROVIDER_API_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      pullPolicy: Always
+>>>>>>> 2a53bcf (init test data)

@@ -1,0 +1,6 @@
+platform-consumer-1:
+  nameOverride: platform-consumer
+  app:
+    image:
+      tag: "CHANGE_ME_PLATFORM_CONSUMER_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      pullPolicy: Always

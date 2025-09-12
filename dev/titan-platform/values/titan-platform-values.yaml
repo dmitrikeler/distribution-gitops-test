@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 game-provider-consumer:
   enabled: true
 platform-storage:
@@ -28,6 +29,23 @@ fe-5:
   enabled: false
 platform-webhook:
   enabled: false
+=======
+---
+# =============================================================================
+# TITAN Platform - Global Configuration Template
+# =============================================================================
+# This file contains global values for the TITAN Platform deployment.
+# Subchart-specific configurations are in separate files.
+#
+# ⚠️  IMPORTANT: You MUST customize the values marked with CHANGE_ME before deployment!
+#
+# Common customizations needed:
+# 1. Update secret store name for your environment
+# 2. Configure database connection details with correct hosts and database names
+# 3. Update site IDs and customer-specific configurations
+# =============================================================================
+
+>>>>>>> 2a53bcf (init test data)
 global:
   dockerDefaults:
     dockerRegistryUrlTitan: docker-new.finnplay.net
@@ -50,6 +68,7 @@ customConfigMaps:
   platform-limit-spring-datasource-url:
     dbName: CHANGE_ME_LIMIT_DB_NAME
   platform-player-spring-datasource-url:
+<<<<<<< HEAD
     dbName: CHANGE_ME_PLAYER_DB_NAME
 platform-tool:
   app:
@@ -159,3 +178,6 @@ fe-1:
       application-vars:
         apiUrl: http://platform-rest-api-CHANGE_ME_CUSTOMER_ID-main/api
         consulServiceName: frontend-CHANGE_ME_CUSTOMER_ID
+=======
+    dbName: "CHANGE_ME_PLAYER_DB_NAME"  # Example: titan_player_prod_k8s
+>>>>>>> 2a53bcf (init test data)
