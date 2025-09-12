@@ -7,7 +7,7 @@ platform-rest-api-2:
 platform-rest-api-3:
   enabled: true
 platform-rest-api-4:
-  enabled: true
+  enabled: false
 platform-rest-api-5:
   enabled: false
 platform-language-2:
