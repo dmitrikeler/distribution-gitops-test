@@ -1,4 +1,2 @@
-# Values for test-app subchart in titan-support-services
-# Add your custom values here
 platform-rest-api:
   enabled: true
