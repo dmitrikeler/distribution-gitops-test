@@ -1,5 +1,5 @@
 cron-task-report:
-  enabled: false
+  enabled: true
   nameOverride: cron-task-report
   app:
     localConfigMaps:

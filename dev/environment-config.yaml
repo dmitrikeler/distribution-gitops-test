@@ -16,7 +16,7 @@ config:
 applications:
 - name: titan-platform
   version: 2.71.0-rc.4
-  enabled: true
+  enabled: false
   valueFiles:
   - backoffice-values.yaml
   - fe-1-values.yaml
