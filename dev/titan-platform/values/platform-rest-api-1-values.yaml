@@ -1,5 +1,5 @@
 platform-rest-api-1:
-  enabled: true
+  enabled: false
   nameOverride: platform-rest-api-CHANGE_ME_CUSTOMER_ID
   app:
     image:
