@@ -16,7 +16,7 @@ config:
 applications:
 - name: titan-platform
   version: 2.71.0-rc.4
-  enabled: false
+  enabled: true
   valueFiles:
   - backoffice-values.yaml
   - fe-1-values.yaml
@@ -50,7 +50,7 @@ applications:
   - titan-platform-values.yaml
 - name: titan-support-services
   version: 2.63.0+build.1
-  enabled: false
+  enabled: true
   valueFiles:
   - activemq-values.yaml
   - apache-values.yaml
