@@ -1,32 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-<<<<<<< HEAD
-  name: dev-appset
-  namespace: argocd
-=======
-  name: dev-apps
-  namespace: finnplay-dev
+  name: prod-apps
+  namespace: finnplay-prod
   labels:
-    environment: dev
+    environment: prod
     type: application-set
   annotations:
     argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
->>>>>>> 98446e6 (test: update test data)
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
-<<<<<<< HEAD
-  - git:
-      repoURL: ${REPOSITORY_URL}
-      revision: HEAD
-      directories:
-      - path: dev/*
-  template:
-    metadata:
-      name: '{{path.basename}}'
-=======
   - list:
       elements:
       - name: titan-support-services
@@ -35,40 +22,30 @@ spec:
         valueFiles: ["activemq-values.yaml","apache-values.yaml","consul-values.yaml","cron-task-report-values.yaml","cron-task-values.yaml","gateway-values.yaml","nginx-values.yaml","redis-values.yaml","titan-support-services-values.yaml"]
   template:
     metadata:
-      name: '{{.name}}-dev'
-      namespace: finnplay-dev
+      name: '{{.name}}-prod'
+      namespace: finnplay-prod
       labels:
-        environment: dev
+        environment: prod
         application: '{{.name}}'
       annotations:
         argocd.argoproj.io/sync-wave: "1"
       finalizers:
         - resources-finalizer.argocd.argoproj.io
->>>>>>> 98446e6 (test: update test data)
     spec:
-      project: default
+      project: finnplay-prod
       source:
-<<<<<<< HEAD
-        repoURL: ${REPOSITORY_URL}
-        targetRevision: HEAD
-        path: '{{path}}'
-=======
         repoURL: oci://ghcr.io/finnplay
         chart: '{{.name}}'
         targetRevision: '{{.version}}'
         helm:
           parameters: []
->>>>>>> 98446e6 (test: update test data)
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: prod
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
-<<<<<<< HEAD
-# Generated for: titan-platform, titan-support-services
-=======
           allowEmpty: false
         syncOptions:
           - CreateNamespace=true
@@ -88,7 +65,6 @@ spec:
         helm:
           valueFiles:
             {{- range .valueFiles }}
-            - 'https://github.com/dmitrikeler/distribution-gitops-test.git/dev/{{$.name}}/values/{{.}}'
+            - 'https://github.com/dmitrikeler/distribution-gitops-test.git/prod/{{$.name}}/values/{{.}}'
             {{- end }}
     {{- end }}
->>>>>>> 98446e6 (test: update test data)

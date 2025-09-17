@@ -1,0 +1,5 @@
+nginx:
+  nameOverride: nginx-platform
+  app:
+    image:
+      tag: "CHANGE_ME_NGINX_IMAGE_TAG"

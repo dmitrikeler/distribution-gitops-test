@@ -3,6 +3,8 @@ description: Dev Environment
 config:
   argocd:
     server: argocd.tooling.test.finnplay.k8s.shockmedia.nl
+    namespace: finnplay-dev
+    project: finnplay-dev
   repositories:
     helm: oci://ghcr.io/finnplay
     distribution: https://github.com/dmitrikeler/distribution-gitops-test.git
@@ -10,10 +12,8 @@ config:
     server: http://localhost:8080
   slack:
     webhookUrl: https://hooks.slack.com/services/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
-    lastValidated: 2025-09-11T15:22:24.826Z
-  argocdNamespace: argocd
-  argocdProject: finnplay-dev
 applications:
+<<<<<<< HEAD
 - name: titan-platform
   version: 2.71.0-rc.4
   enabled: true
@@ -61,3 +61,18 @@ applications:
   - nginx-values.yaml
   - redis-values.yaml
   - titan-support-services-values.yaml
+=======
+  - name: titan-support-services
+    version: 2.63.0+build.1
+    enabled: true
+    valueFiles:
+      - activemq-values.yaml
+      - apache-values.yaml
+      - consul-values.yaml
+      - cron-task-report-values.yaml
+      - cron-task-values.yaml
+      - gateway-values.yaml
+      - nginx-values.yaml
+      - redis-values.yaml
+      - titan-support-services-values.yaml
+>>>>>>> 98446e6 (test: update test data)
