@@ -1,6 +1,0 @@
-platform-language-consumer:
-  enabled: false
-  app:
-    image:
-      tag: CHANGE_ME_PLATFORM_LANG_CONSUMER_TAG
-      pullPolicy: Always

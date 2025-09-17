@@ -1,9 +1,0 @@
-name: Sync Reusable Configs
-on:
-  workflow_dispatch:
-jobs:
-  sync-reusables:
-    uses: finnplay/helm-reusables/.github/workflows/sync-reusables.yaml@master
-    secrets: inherit # pragma: allowlist secret
-    with:
-      dry_run: false
