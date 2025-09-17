@@ -50,7 +50,7 @@ applications:
   - titan-platform-values.yaml
 - name: titan-support-services
   version: 2.63.0+build.1
-  enabled: true
+  enabled: false
   valueFiles:
   - activemq-values.yaml
   - apache-values.yaml
