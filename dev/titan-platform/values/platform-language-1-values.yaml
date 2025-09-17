@@ -1,5 +1,5 @@
 platform-language-1:
-  enabled: false
+  enabled: true
   nameOverride: platform-language
   app:
     image:
