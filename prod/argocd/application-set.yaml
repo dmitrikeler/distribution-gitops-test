@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: dev-apps
-  namespace: finnplay-dev
+  name: prod-apps
+  namespace: finnplay-prod
   labels:
-    environment: dev
+    environment: prod
     type: application-set
   annotations:
     argocd.argoproj.io/sync-wave: "0"
@@ -22,17 +22,17 @@ spec:
         valueFiles: ["activemq-values.yaml","apache-values.yaml","consul-values.yaml","cron-task-report-values.yaml","cron-task-values.yaml","gateway-values.yaml","nginx-values.yaml","redis-values.yaml","titan-support-services-values.yaml"]
   template:
     metadata:
-      name: '{{.name}}-dev'
-      namespace: finnplay-dev
+      name: '{{.name}}-prod'
+      namespace: finnplay-prod
       labels:
-        environment: dev
+        environment: prod
         application: '{{.name}}'
       annotations:
         argocd.argoproj.io/sync-wave: "1"
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: finnplay-dev
+      project: finnplay-prod
       source:
         repoURL: oci://ghcr.io/finnplay
         chart: '{{.name}}'
@@ -41,7 +41,7 @@ spec:
           parameters: []
       destination:
         server: https://kubernetes.default.svc
-        namespace: dev
+        namespace: prod
       syncPolicy:
         automated:
           prune: true
@@ -65,6 +65,6 @@ spec:
         helm:
           valueFiles:
             {{- range .valueFiles }}
-            - 'https://github.com/dmitrikeler/distribution-gitops-test.git/dev/{{$.name}}/values/{{.}}'
+            - 'https://github.com/dmitrikeler/distribution-gitops-test.git/prod/{{$.name}}/values/{{.}}'
             {{- end }}
     {{- end }}

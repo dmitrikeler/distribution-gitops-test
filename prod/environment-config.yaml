@@ -1,10 +1,10 @@
-name: dev
-description: Dev Environment
+name: prod
+description: Prod Environment
 config:
   argocd:
     server: argocd.tooling.test.finnplay.k8s.shockmedia.nl
-    namespace: finnplay-dev
-    project: finnplay-dev
+    namespace: finnplay-prod
+    project: finnplay-prod
   repositories:
     helm: oci://ghcr.io/finnplay
     distribution: https://github.com/dmitrikeler/distribution-gitops-test.git

@@ -10,12 +10,8 @@ jenkins:
   deploymentJobsDirectory: deployments
 slack:
   webhookUrl: https://hooks.slack.com/services/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
-  lastValidated: 2025-09-11T15:22:24.826Z
 repositories:
   helm: oci://ghcr.io/finnplay
   distribution: https://github.com/dmitrikeler/distribution-gitops-test.git
 git:
   branch: master
-reusables:
-  lastSyncSha: 1a325cd8529b55a3f454a84b9dfe9169ac3566d0
-  lastSyncDate: 2025-09-11T15:24:45.185Z
