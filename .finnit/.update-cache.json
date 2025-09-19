@@ -1,11 +1,7 @@
 {
   "currentVersion": "1.0.5",
   "latestVersion": "1.0.1",
-<<<<<<< HEAD
-  "checkedAt": 1758277781432,
-=======
   "checkedAt": 1758273966471,
->>>>>>> 3eaa0d2 (test: update test data)
   "updateAvailable": false,
   "registry": "https://npm.pkg.github.com",
   "packageName": "@finnplay/finnit"
