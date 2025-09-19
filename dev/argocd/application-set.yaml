@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: dev-apps
-  namespace: finnplay-dev
+  namespace: finnplay-dev1
   labels:
     environment: dev
     type: application-set
@@ -56,7 +56,7 @@ spec:
           parameters: []
       destination:
         server: https://kubernetes.default.svc
-        namespace: dev
+        namespace: finnplay-dev
       syncPolicy:
         automated:
           prune: true
