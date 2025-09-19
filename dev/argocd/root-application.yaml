@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: dev-root
-  namespace: finnplay-dev
+  namespace: finnplay-dev1
   labels:
     environment: dev
     type: root-application
@@ -18,7 +18,7 @@ spec:
     path: "dev/argocd"
   destination:
     server: https://kubernetes.default.svc
-    namespace: finnplay-dev
+    namespace: finnplay-dev1
   syncPolicy:
     automated:
       prune: true
