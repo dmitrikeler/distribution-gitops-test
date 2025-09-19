@@ -1,0 +1,13 @@
+name: Package Chart
+
+on:
+  push:
+    tags-ignore:
+      - '*build*'
+    branches-ignore:
+      - '**'
+
+jobs:
+  build-rc:
+    uses: finnplay/helm-reusables/.github/workflows/build-rc.yaml@master
+    secrets: inherit # pragma: allowlist secret

@@ -1,0 +1,9 @@
+backoffice:
+  app:
+    image:
+      tag: "CHANGE_ME_BACKOFFICE_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      pullPolicy: Always
+    localConfigMaps:
+      application-vars:
+        javaOpts: -Xms10G -Xmx10G -XX:+UseG1GC
+        LOG_APPENDER: CONSOLE
