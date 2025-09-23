@@ -50,7 +50,7 @@ spec:
     spec:
       project: finnplay-dev
       sources:
-      - repoURL: oci://helm.finnplay.net/finnplay
+      - repoURL: helm.finnplay.net/finnplay
         chart: '{{.appName}}'
         targetRevision: '{{.appVersion}}'
         helm:
