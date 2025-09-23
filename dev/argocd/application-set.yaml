@@ -79,7 +79,7 @@ spec:
     {{- if .appValueFiles }}
     spec:
       sources:
-      - repoURL: https://helm.finnplay.net/finnplay
+      - repoURL: helm.finnplay.net/finnplay
         chart: '{{.appName}}'
         targetRevision: '{{.appVersion}}'
         helm:
