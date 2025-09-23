@@ -14,15 +14,19 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - matrix:
+  # Use merge generator to avoid cartesian product issues
+  - merge:
+      mergeKeys:
+        - name
       generators:
-      # Git generator reads environment-config.yaml
       - git:
           repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
           revision: HEAD
           files:
           - path: "dev/environment-config.yaml"
-      # List generator expands the applications array for enabled apps only
+          values:
+            # Extract only the applications array
+            applications: '{{ .applications | toJson }}'
       - list:
           elementsYaml: |
             {{- range .applications }}
