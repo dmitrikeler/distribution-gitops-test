@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: dev-apps
-  namespace: finnplay-dev
+  name: finnplay-dev-apps
+  namespace: finnplay-dev1
   labels:
     environment: dev
     type: application-set
@@ -37,8 +37,8 @@ spec:
             {{- end }}
   template:
     metadata:
-      name: '{{.name}}-dev'
-      namespace: finnplay-dev
+      name: 'finnplay-dev-{{.name}}'
+      namespace: finnplay-dev1
       labels:
         environment: dev
         application: '{{.name}}'
@@ -49,14 +49,14 @@ spec:
     spec:
       project: finnplay-dev
       sources:
-      - repoURL: oci://ghcr.io/finnplay
+      - repoURL: oci://helm.finnplay.net/finnplay
         chart: '{{.name}}'
         targetRevision: '{{.version}}'
         helm:
           parameters: []
       destination:
         server: https://kubernetes.default.svc
-        namespace: dev
+        namespace: finnplay-dev1
       syncPolicy:
         automated:
           prune: true
@@ -78,13 +78,13 @@ spec:
     {{- if .valueFiles }}
     spec:
       sources:
-      - repoURL: oci://ghcr.io/finnplay
+      - repoURL: oci://helm.finnplay.net/finnplay
         chart: '{{.name}}'
         targetRevision: '{{.version}}'
         helm:
           valueFiles:
             {{- range .valueFiles }}
-            - $values/dev/{{$.name}}/values/{{.}}
+            - $values/dev/{{$.name}}/{{.}}
             {{- end }}
       - repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
         targetRevision: HEAD
