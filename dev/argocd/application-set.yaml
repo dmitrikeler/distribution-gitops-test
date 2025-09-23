@@ -79,13 +79,13 @@ spec:
     {{- if .appValueFiles }}
     spec:
       sources:
-      - repoURL: helm.finnplay.net/finnplay
+      - repoURL: oci://helm.finnplay.net/finnplay
         chart: '{{.appName}}'
         targetRevision: '{{.appVersion}}'
         helm:
           valueFiles:
             {{- range .appValueFiles }}
-            - $values/dev/{{$.appName}}/{{.}}
+            - $values/dev/{{$.appName}}/values/{{.}}
             {{- end }}
       - repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
         targetRevision: HEAD
