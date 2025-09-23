@@ -14,38 +14,35 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  # Use merge generator to avoid cartesian product issues
-  - merge:
-      mergeKeys:
-        - name
+  # Matrix generator to properly iterate over applications array
+  - matrix:
       generators:
+      # First generator: Git file generator reads environment-config.yaml
       - git:
           repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
           revision: HEAD
           files:
           - path: "dev/environment-config.yaml"
-          values:
-            # Extract only the applications array
-            applications: '{{ .applications | toJson }}'
+      # Second generator: List generator that iterates over applications
       - list:
           elementsYaml: |
             {{- range .applications }}
             {{- if .enabled }}
-            - name: {{ .name }}
-              version: {{ .version }}
-              enabled: "{{ .enabled }}"
+            - appName: {{ .name }}
+              appVersion: {{ .version }}
+              appEnabled: "{{ .enabled }}"
               {{- if .valueFiles }}
-              valueFiles: {{ .valueFiles | toJson }}
+              appValueFiles: {{ .valueFiles | toJson }}
               {{- end }}
             {{- end }}
             {{- end }}
   template:
     metadata:
-      name: 'finnplay-dev-{{.name}}'
+      name: 'finnplay-dev-{{.appName}}'
       namespace: finnplay-dev1
       labels:
         environment: dev
-        application: '{{.name}}'
+        application: '{{.appName}}'
       annotations:
         argocd.argoproj.io/sync-wave: "1"
       finalizers:
@@ -54,8 +51,8 @@ spec:
       project: finnplay-dev
       sources:
       - repoURL: oci://helm.finnplay.net/finnplay
-        chart: '{{.name}}'
-        targetRevision: '{{.version}}'
+        chart: '{{.appName}}'
+        targetRevision: '{{.appVersion}}'
         helm:
           parameters: []
       destination:
@@ -79,16 +76,16 @@ spec:
       revisionHistoryLimit: 10
   # Template patch to conditionally add values source when valueFiles are present
   templatePatch: |
-    {{- if .valueFiles }}
+    {{- if .appValueFiles }}
     spec:
       sources:
       - repoURL: oci://helm.finnplay.net/finnplay
-        chart: '{{.name}}'
-        targetRevision: '{{.version}}'
+        chart: '{{.appName}}'
+        targetRevision: '{{.appVersion}}'
         helm:
           valueFiles:
-            {{- range .valueFiles }}
-            - $values/dev/{{$.name}}/{{.}}
+            {{- range .appValueFiles }}
+            - $values/dev/{{$.appName}}/{{.}}
             {{- end }}
       - repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
         targetRevision: HEAD
