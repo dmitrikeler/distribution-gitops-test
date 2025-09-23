@@ -18,7 +18,7 @@ spec:
     path: "dev/argocd"
   destination:
     server: https://kubernetes.default.svc
-    namespace: finnplay-dev1
+    namespace: finnplay-dev
   syncPolicy:
     automated:
       prune: true
