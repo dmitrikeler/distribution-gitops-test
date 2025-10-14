@@ -1,0 +1,6 @@
+data:
+  name: titan-newbo-api
+  description: A Helm chart for new backoffice api in k8s
+  version: 1.0.0-rc.1
+  type: app
+timestamp: 1760432286302

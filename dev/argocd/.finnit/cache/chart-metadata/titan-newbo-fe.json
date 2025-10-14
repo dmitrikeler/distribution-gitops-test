@@ -1,0 +1,6 @@
+data:
+  name: titan-newbo-fe
+  description: A Helm chart for backoffice in k8s
+  version: 1.0.0-rc.5
+  type: app
+timestamp: 1760432288345
