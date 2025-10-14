@@ -14,6 +14,11 @@ config:
   jenkins:
     server: http://localhost:8080
 applications:
+  - name: titan-newbo
+    version: 1.0.0-rc.4
+    enabled: true
+    valueFiles:
+      - titan-newbo-values.yaml
   - name: titan-support-services
     version: 2.63.0+build.2
     enabled: true
