@@ -3,4 +3,4 @@ data:
   description: The umbrella Helm chart for Titan platform subcharts
   version: 2.65.3+build.1
   type: umbrella
-timestamp: 1760432051996
+timestamp: 1760432291989

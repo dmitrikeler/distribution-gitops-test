@@ -3,4 +3,4 @@ data:
   description: The umbrella Helm chart for New Backoffice subcharts
   version: 1.0.0-rc.4
   type: umbrella
-timestamp: 1760432043818
+timestamp: 1760432284633
