@@ -1,0 +1,6 @@
+data:
+  name: titan-infra
+  description: An umbrella Helm chart for deploying Titan infrastructure and support services
+  version: 2.52.0+build.1
+  type: umbrella
+timestamp: 1760430666440

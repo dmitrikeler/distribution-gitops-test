@@ -1,0 +1,23 @@
+consul:
+  global:
+    logLevel: "info"
+    logJSON: false
+    tls:
+      enabled: false
+    metrics:
+      enabled: false
+
+  server:
+    enabled: true
+    connect: false
+    replicas: 3
+    storage: 10Gi
+    storageClass: lvm-thin
+
+    resources:
+      requests:
+        memory: "200Mi"
+        cpu: "100m"
+      limits:
+        memory: "1000Mi"
+        cpu: "500m"
