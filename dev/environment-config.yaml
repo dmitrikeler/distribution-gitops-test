@@ -21,7 +21,7 @@ applications:
       - titan-newbo-values.yaml
   - name: titan-support-services
     version: 2.63.0+build.2
-    enabled: true
+    enabled: false
     valueFiles:
       - activemq-values.yaml
       - apache-values.yaml
