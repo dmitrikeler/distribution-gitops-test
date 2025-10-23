@@ -1,6 +1,0 @@
-data:
-  name: titan-support-services
-  description: An umbrella Helm chart for deploying Titan infrastructure and support services
-  version: 2.63.0+build.2
-  type: umbrella
-timestamp: 1760432294068

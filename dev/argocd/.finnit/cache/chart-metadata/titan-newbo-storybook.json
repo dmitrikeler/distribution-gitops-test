@@ -1,6 +1,0 @@
-data:
-  name: titan-newbo-storybook
-  description: A Helm chart for backoffice in k8s
-  version: 1.0.0-rc.1
-  type: app
-timestamp: 1760432290079
