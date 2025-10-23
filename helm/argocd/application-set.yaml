@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: finnplay-dev-apps
-  namespace: finnplay-dev
+  name: finnplay-helm-apps
+  namespace: finnplay-helm
   labels:
-    environment: dev
+    environment: helm
     type: application-set
   annotations:
     argocd.argoproj.io/sync-wave: "0"
@@ -22,7 +22,7 @@ spec:
           repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
           revision: HEAD
           files:
-          - path: "dev/environment-config.yaml"
+          - path: "helm/environment-config.yaml"
       # Second generator: List generator that iterates over applications
       - list:
           elementsYaml: |
@@ -38,17 +38,17 @@ spec:
             {{- end }}
   template:
     metadata:
-      name: 'finnplay-dev-{{.appName}}'
-      namespace: finnplay-dev
+      name: 'finnplay-helm-{{.appName}}'
+      namespace: finnplay-helm
       labels:
-        environment: dev
+        environment: helm
         application: '{{.appName}}'
       annotations:
         argocd.argoproj.io/sync-wave: "1"
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: finnplay-dev
+      project: finnplay-helm
       sources:
       - repoURL: helm.finnplay.net/finnplay
         chart: '{{.appName}}'
@@ -57,7 +57,7 @@ spec:
           parameters: []
       destination:
         server: https://kubernetes.default.svc
-        namespace: finnplay-dev
+        namespace: finnplay-helm
       syncPolicy:
         automated:
           prune: true
@@ -85,7 +85,7 @@ spec:
         helm:
           valueFiles:
             {{- range .appValueFiles }}
-            - $values/dev/{{$.appName}}/values/{{.}}
+            - $values/helm/{{$.appName}}/values/{{.}}
             {{- end }}
       - repoURL: https://github.com/dmitrikeler/distribution-gitops-test.git
         targetRevision: HEAD

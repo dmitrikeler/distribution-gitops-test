@@ -1,13 +1,13 @@
-name: dev
-description: Dev Environment
+name: helm
+description: Helm Environment
 customer: finnplay
 kubernetes:
-  namespace: finnplay-dev
+  namespace: finnplay-helm
 config:
   argocd:
     server: argocd.tooling.test.finnplay.k8s.shockmedia.nl
-    namespace: finnplay-dev
-    project: finnplay-dev
+    namespace: finnplay-helm
+    project: finnplay-helm
   repositories:
     helm: helm.finnplay.net/finnplay
     distribution: https://github.com/dmitrikeler/distribution-gitops-test.git
@@ -15,7 +15,7 @@ config:
     server: http://localhost:8080
 applications:
   - name: titan-platform
-    version: 2.65.3+build.1
+    version: 2.71.0-rc.4
     enabled: true
     valueFiles:
       - backoffice-values.yaml
