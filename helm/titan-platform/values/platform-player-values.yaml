@@ -1,0 +1,5 @@
+platform-player:
+  app:
+    image:
+      tag: "CHANGE_ME_PLATFORM_PLAYER_TAG"  # Example: 2.25.0 (change from 2.25-SNAPSHOT for prod)
+      pullPolicy: Always

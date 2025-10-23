@@ -1,0 +1,41 @@
+name: helm
+description: Helm Environment
+customer: finnplay
+kubernetes:
+  namespace: finnplay-helm
+config:
+  argocd:
+    server: argocd.tooling.test.finnplay.k8s.shockmedia.nl
+    namespace: finnplay-helm
+    project: finnplay-helm
+  repositories:
+    helm: helm.finnplay.net/finnplay
+    distribution: https://github.com/dmitrikeler/distribution-gitops-test.git
+  jenkins:
+    server: http://localhost:8080
+applications:
+  - name: titan-platform
+    version: 2.71.0-rc.4
+    enabled: true
+    valueFiles:
+      - backoffice-values.yaml
+      - fe-1-values.yaml
+      - fe-2-values.yaml
+      - game-provider-api-values.yaml
+      - game-provider-consumer-values.yaml
+      - payment-provider-api-values.yaml
+      - platform-bo-api-values.yaml
+      - platform-consumer-values.yaml
+      - platform-language-1-values.yaml
+      - platform-language-2-values.yaml
+      - platform-language-consumer-values.yaml
+      - platform-limit-values.yaml
+      - platform-player-values.yaml
+      - platform-rest-api-1-values.yaml
+      - platform-rest-api-2-values.yaml
+      - platform-storage-values.yaml
+      - platform-task-values.yaml
+      - platform-tool-values.yaml
+      - platform-transaction-proxy-values.yaml
+      - platform-webhook-values.yaml
+      - titan-platform-values.yaml
