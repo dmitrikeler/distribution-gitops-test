@@ -1,0 +1,5 @@
+payment-provider-api:
+  app:
+    image:
+      tag: "CHANGE_ME_PAYMENT_PROVIDER_API_TAG"  # Example: 2.69.0 (change from 2.69-SNAPSHOT for prod)
+      pullPolicy: Always
